@@ -1,0 +1,94 @@
+<html>
+
+<body>
+    <h1>Find the hidden button and click it!</h1>
+    <p><b>How many buttons can you click in 15 seconds?</b></p>
+    <button id="reset">Reset</button>
+    <p>
+        <div>Highscore: </div>
+        <div id="highScore"></div>
+    </p>
+    <p>
+        <div>Time left:</div>
+        <div id="timerRem"></div>
+    </p>
+    <div>Current Score:</div>
+    <div id="pointsText"></div>
+    <button id="button">Click me</button>
+    <script>
+        let points = 0;
+        let highscore = 0; 
+        let pointsText = document.getElementById('pointsText');
+        let highScoreText = document.getElementById("highScore");
+        highScoreText.innerText = highscore;
+        pointsText.innerText = points;
+
+        let button = document.getElementById('button');
+        button.style.position = 'absolute';
+        // Hide button
+        button.style.visibility = 'hidden';
+        // Move button to a random position
+        button.style.left = Math.floor(Math.random() * 500) + 'px';
+        button.style.top = Math.floor(Math.random() * 500) + 'px';
+
+        // Show button when the mouse cursor is close to it
+        window.onmousemove = (event) => {
+            // Find the center of button
+            let rect = button.getBoundingClientRect();
+            let centerX = (rect.right + rect.left) / 2;
+            let centerY = (rect.bottom + rect.top) / 2;
+
+            // Calculate distance between mouse cursor and center of button
+            let distance = Math.sqrt(
+                Math.pow(centerX - event.clientX, 2) + Math.pow(centerY - event.clientY, 2)
+            );
+
+            if (distance < 100 && button.style.visibility == 'hidden') {
+                button.style.visibility = 'visible';
+            }
+        };
+
+        setInterval(() => {
+            timer -= 1;
+            timeRem.innerText = timer;
+            if(timer == 0){
+                alert(`Game over! You scored ${points} points`);
+                if(points > highscore){
+                    highscore = points;
+                }
+                points = 0;
+                highScoreText.innerText = highscore;
+                pointsText.innerText = points;
+                timer = 15;
+                moveBtn(button);
+            }
+        }, 1000);
+
+        let timer = 15;
+        let timeRem = document.getElementById("timerRem");
+        timeRem.innerHTML = timer;
+        
+        document.getElementById("reset").onclick = () => {
+            timer = 15;
+            points = 0;
+            pointsText.innerText = points;
+            highscore = 0;
+            highScoreText.innerText = highscore;
+            moveBtn(button);
+        }
+
+        button.onclick = () => {
+            points += 1;
+            pointsText.innerText = points;
+            moveBtn(button);
+        }
+
+        function moveBtn(x){
+            x.style.visibility = 'hidden';
+            x.style.left = Math.floor(Math.random() * 500) + 'px';
+            x.style.top = Math.floor(Math.random() * 500) + 'px';
+        }
+    </script>
+</body>
+
+</html>

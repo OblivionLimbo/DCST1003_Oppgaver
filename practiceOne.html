@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang=eng>
+<head>
+<meta charset=UTF-8>
+<meta name=author content=Oblivion>
+<meta name=viewport content=width=device-width, initial-scale=1>
+<title>Øving 1</title>
+
+</head>
+<body>
+        <div>
+            Oppgave 1
+            <br><br>
+            <div id="box"></div>
+            <br><br>
+        </div>
+        <div>
+            Oppgave 2
+            <br><br>
+            <p>Vennligst oppgi følgende</p>
+            <br>
+            Fornavn <br> <input id="fnavn" type="text">
+            <br>
+            Mellomnavn <br> <input id="mnavn" type="text">
+            <br>
+            Etternavn <br> <input id="enavn" type="text">
+            <br>
+            <button id="send">Send inn</button>
+            <br>
+            <div id="output"></div>
+            <br><br>
+        </div>
+        <div>
+            Oppgave 3
+            <br><br>
+            <input type="text" id="live">
+            <br>
+            <div id="liveOutput"></div>
+            <br><br>
+        </div>
+</body>
+<style></style>
+<script>
+// Oppgave 1
+let box = document.getElementById("box");
+
+let person = prompt("Navn");
+let colour = prompt("Favoritt-farge");
+// Two prompts that gather information
+window.onload = inputOne(person,colour);
+//Once window is loaded (prompts have been filled out) do the function
+
+function inputOne(a,b){
+    alert("Hei " + a + " liker du " + b + "-farge du?");
+    box.innerHTML = "Hei " + a + " liker du " + b + "-farge du?";
+    // box.innerHTML = `Hei, ${a} du liker ${b}-farge du?`
+    // Alerts the user with the message, then displays it on the page in a seperate div
+}
+
+// Oppgave 2
+document.getElementById("send").onclick = function() {
+    let fnavn = document.getElementById("fnavn").value;
+    let mnavn = document.getElementById("mnavn").value;
+    let enavn = document.getElementById("enavn").value;
+    // Gets values of each of the input fields
+    document.getElementById("output").innerHTML = fnavn + " " + mnavn + " " + enavn;
+    // Inputs the name into a seperate div
+}
+
+// Oppgave 3
+let input = document.getElementById("live");
+let output = document.getElementById("liveOutput");
+
+input.oninput = function(){
+    output.innerHTML = this.value;
+}
+// Pretty self explanitory, when you type in the input field, the value of the div below mirrors what is in the input the moment you type. 
+</script>
+</html>

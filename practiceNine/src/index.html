@@ -3,9 +3,48 @@
     <meta charset="UTF-8" />
     <title>Desktop application</title>
   </head>
+  <style>
+    .delBtn{
+      margin-left: 10px;
+    }
+    #errorMsg{
+      color:red;
+      margin-top: 20px;
+      width: fit-content;
+      padding: 20 20 20 20;
+      margin-top: 50px;
+      border: 1px solid rgb(214, 32, 32);
+      border-radius: 5px;
+      visibility: hidden;
+    }
+    #delete{
+      color:red;
+    }
+  </style>
   <body>
     Students:
     <ul id="studentList"></ul>
+
+    <p>
+    <b> Add a student: </b> <br>
+
+      Name: <input type="text" id="name"> <br>
+      Email: <input type="email" id="email"><br>
+      <button id="insertStudent">Add</button> 
+    </p>
+    <p>
+      <b>Edit a student</b> <br>
+      Select student: 
+      <select id="selStud"></select> 
+      <br> <br>
+      New Name: <input type="text" id="newName"> <button id="changeName"> Change </button> <br>
+      New Email: <input type="email" id="newEmail"> <button id="changeEmail"> Change </button>
+    </p>
+    <p>
+      Ability to delete Students: <button id="delete">Disabled</button>
+    </p>
+    <p id="errorMsg"></p>
+
     <script>
       require('@babel/register');
       require('./index.js');

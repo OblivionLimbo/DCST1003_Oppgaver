@@ -16,18 +16,18 @@ let errorMsg = document.getElementById("errorMsg");
 //   }
 // });
 
-display();
+display()
 
 function display() {
   while (studentList.firstChild) {
-    studentList.removeChild(studentList.firstChild)
+    studentList.removeChild(studentList.firstChild);
   }
   while (selStud.firstChild) {
-    selStud.removeChild(selStud.firstChild)
+    selStud.removeChild(selStud.firstChild);
   }
   pool.query('SELECT * from Students', (error,results) => {
     if(error){
-      console.error(error.message)
+      console.error(error.message);
       return;
     }
     for(let student of results){
@@ -37,18 +37,18 @@ function display() {
       selStud.appendChild(opt);
     }
     for(let student of results) {
-      let li = document.createElement('li')
-      li.innerText = student.name + ', ' + student.email
+      let li = document.createElement('li');
+      li.innerText = student.name + ', ' + student.email;
 
-      let btn = document.createElement('button')
-      btn.innerText = 'Remove Student'
-      btn.id = student.id
-      btn.value = student.id
-      btn.className = "delBtn"
+      let btn = document.createElement('button');
+      btn.innerText = 'Remove Student';
+      btn.id = student.id;
+      btn.value = student.id;
+      btn.className = "delBtn";
       // btn.style.visibility = 'hidden';
       btn.onclick = () => {
-        let isExectued = confirm("Are you sure you want to delete this student?");
-        if(isExectued == true){
+        let confirmAction = confirm("Are you sure you want to delete this student?");
+        if(confirmAction){
           pool.query('DELETE FROM Students WHERE id=?', [student.id], (error) => {
             if(error){
               console.error(error.message);
@@ -57,32 +57,32 @@ function display() {
           })
           display();
         }
-        else if(isExectued == false){
-          alert("Cancelled action");
+        else{
+          alert("Action Cancelled");
         }
       }
-      li.appendChild(btn)
-      studentList.appendChild(li)
+      li.appendChild(btn);
+      studentList.appendChild(li);
       
     }
    })
 }
 
 document.getElementById("insertStudent").onclick = () => {
-  let name = document.getElementById("name").value
+  let name = document.getElementById("name").value;
   let email = String(document.getElementById("email").value).toLowerCase()
   if (name == "" || email == "") {
     errorMsg.style.visibility = 'visible';
     errorMsg.innerText = 'You need to set values for both fields';
     return;
   }
-  errorMsg.innerText = ""
+  errorMsg.innerText = "";
   errorMsg.style.visibility = 'hidden';
   pool.query(
     'INSERT into Students (name,email) VALUES (?,?)', [name,email], (error,results) => {
       if(error){
-        console.error(error.message)
-        return
+        console.error(error.message);
+        return;
       }
     }
   )
@@ -104,7 +104,7 @@ document.getElementById("changeName").onclick = () => {
       return;
     }
   })
-  display()
+  display();
 }
 document.getElementById("changeEmail").onclick = () => {
   let id = document.getElementById("selStud").value;
@@ -121,7 +121,7 @@ document.getElementById("changeEmail").onclick = () => {
       return;
     }
   })
-  display()
+  display();
 }
 // let count = 0;
 // allowDelete.onclick = () => {

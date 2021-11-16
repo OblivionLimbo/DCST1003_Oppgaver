@@ -3,7 +3,7 @@ import { pool } from './mysql-pool';
 let studentList = document.getElementById('studentList');
 let selStud = document.getElementById("selStud");
 let errorMsg = document.getElementById("errorMsg");
-let allowDelete = document.getElementById("delete");
+// let allowDelete = document.getElementById("delete");
 
 // Perform select-query that fetches all the Students table rows from the database
 // pool.query('SELECT * FROM Students', (error, results) => {
@@ -45,14 +45,21 @@ function display() {
       btn.id = student.id
       btn.value = student.id
       btn.className = "delBtn"
-      btn.style.visibility = 'hidden';
+      // btn.style.visibility = 'hidden';
       btn.onclick = () => {
-        pool.query('DELETE FROM Students WHERE id=?', [student.id], (error) => {
-          if(error){
-            console.error(error.message);
-          }
-        })
-        display();
+        let isExectued = confirm("Are you sure you want to delete this student?");
+        if(isExectued == true){
+          pool.query('DELETE FROM Students WHERE id=?', [student.id], (error) => {
+            if(error){
+              console.error(error.message);
+              return;
+            }
+          })
+          display();
+        }
+        else if(isExectued == false){
+          alert("Cancelled action");
+        }
       }
       li.appendChild(btn)
       studentList.appendChild(li)
@@ -74,7 +81,7 @@ document.getElementById("insertStudent").onclick = () => {
   pool.query(
     'INSERT into Students (name,email) VALUES (?,?)', [name,email], (error,results) => {
       if(error){
-        console.error(error)
+        console.error(error.message)
         return
       }
     }
@@ -94,6 +101,7 @@ document.getElementById("changeName").onclick = () => {
   pool.query('UPDATE Students SET name=? WHERE id=?', [newName,id], (error) => {
     if(error){
       console.error(error.message);
+      return;
     }
   })
   display()
@@ -110,30 +118,31 @@ document.getElementById("changeEmail").onclick = () => {
   pool.query('UPDATE Students SET email=? WHERE id=?', [newEmail,id], (error) => {
     if(error){
       console.error(error.message);
+      return;
     }
   })
   display()
 }
-let count = 0;
-allowDelete.onclick = () => {
-  pool.query('SELECT * from Students', (error,results) => {
-    if(error){
-      console.error(error.message)
-      return;
-    }
-    for(let student of results){
-      if(count % 2 === 0){
-        allowDelete.innerText = "Enabled"
-        allowDelete.style.color = 'green'
-        document.getElementById(student.id).style.visibility = 'visible'
-      }
-      if(count % 2 === 1){
-        allowDelete.innerText = "Disabled"
-        allowDelete.style.color = 'red'
-        document.getElementById(student.id).style.visibility = 'hidden'
-      }
-    }
-    count+= 1;
-   })
+// let count = 0;
+// allowDelete.onclick = () => {
+//   pool.query('SELECT * from Students', (error,results) => {
+//     if(error){
+//       console.error(error.message)
+//       return;
+//     }
+//     for(let student of results){
+//       if(count % 2 === 0){
+//         allowDelete.innerText = "Enabled"
+//         allowDelete.style.color = 'green'
+//         document.getElementById(student.id).style.visibility = 'visible'
+//       }
+//       if(count % 2 === 1){
+//         allowDelete.innerText = "Disabled"
+//         allowDelete.style.color = 'red'
+//         document.getElementById(student.id).style.visibility = 'hidden'
+//       }
+//     }
+//     count+= 1;
+//    })
   
-}
+// }

@@ -39,8 +39,7 @@ console.log(
   );
 
 function listArr(arr){
-  const a = arr.map((x,i) => ` v[${i}] = ${x}`);
-  return a;
+  return arr.map((x,i) => ` v[${i}] = ${x}`);
 }
 
 // Task 2
@@ -61,53 +60,43 @@ console.log(
   );
 
 function listStud(arr){
-  // let temp = [];
-  // arr.forEach(student => temp.push((`${student.name} got ${student.grade}`).toString()));
-  const a = (arr.map(e => `${e.name} got ${e.grade}`));
-  return JSON.stringify(a);
+  return JSON.stringify(arr.map(e => `${e.name} got ${e.grade}`));
 }
 
 // Kari got: C
 
 console.log(
-  `Kari got:
-  ${grade('Kari')}`
+  `Kari got: ${grade('Kari')}`
   );
 
 function grade(student){
-  const a = students.find(({name}) => name === student);
-  return a.grade;
+  return students.find(({name}) => name === student).grade;
 }
 
 // Did everyone get C: No
 
 console.log(
-  `Did everyone get C:
-  ${everyoneC(students)}`
+  `Did everyone get C: ${everyoneC(students)}`
   );
 
   function everyoneC(arr){
-    const a = arr.every(x => x.grade === 'C')
-    return a === true ? 'Yes' : 'No';
+    return arr.every(x => x.grade === 'C') === true ? 'Yes' : 'No';
   }
 
 // How many got C: 2
 
 console.log(
-  `How many got C:
-  ${howManyC(students)}`
+  `How many got C: ${howManyC(students)}`
   );
 
   function howManyC(arr){
-    const a = arr.filter(x => x.grade === 'C');
-    return a.length;
+    return arr.filter(x => x.grade === 'C').length;
   }
 
 // Percentage of C grades: 66.66666666666667
 
 console.log(
-  `Percentage of C grades:
-  ${percentageC(students)}`
+  `Percentage of C grades: ${percentageC(students)}`
   );
 
   function percentageC(arr){
@@ -117,23 +106,19 @@ console.log(
 // Did anyone get A: Yes
 
 console.log(
-  `Did anyone get A:
-  ${anyoneA(students)}`
+  `Did anyone get A: ${anyoneA(students)}`
   );
 
   function anyoneA(arr){
-    const a = arr.some(x => x.grade === 'A' )
-    return a === true ? 'Yes' : 'No';
+    return arr.some(x => x.grade === 'A') === true ? 'Yes' : 'No';
   }
 
 // Did anyone get F: No
 
 console.log(
-  `Did anyone get F:
-  ${anyoneF(students)}`
+  `Did anyone get F: ${anyoneF(students)}`
   );
 
   function anyoneF(arr){
-    const a = arr.some(x => x.grade === 'F' )
-    return a === true ? 'Yes' : 'No';
+    return arr.some(x => x.grade === 'F') === true ? 'Yes' : 'No';
   }

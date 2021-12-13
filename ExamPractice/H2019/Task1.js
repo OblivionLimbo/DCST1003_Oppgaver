@@ -15,21 +15,22 @@ btn.onclick = () => {
         return;
     }
     else{
-        if(car == "Toyota"){
-            price += (days * 400)
-        }
-        else if(car == "BMW"){
-            price += (days * 600)
-        }
-        else if(car == "Audi"){
-            price += (days * 500)
-        }
-        else if(car == "Porsche"){
-            price += (days * 750)
-        }
-        else{
-            alert("Ingen biltype valgt")
-            return;
+        switch (car) {
+            case "Toyota":
+                price += (days * 400)
+                break;
+            case "BMW":
+                price += (days * 600)
+                break;
+            case "Audi":
+                price += (days * 500)
+                break;
+            case "Porche":
+                price += (days * 750)
+                break;
+            default:
+                alert("Ingen biltype valgt")
+                break;
         }
         if(age > 25 && car != "Porsche"){
             discount = "10%"

@@ -23,7 +23,6 @@ sup.oninput = () => {
 let total = 0;
 function returnTotal(a,b,c) {
     total = a+b+c;
-    console.log(total)
     if (total > 2){
         utskrift.innerText = 'Du kan velge maks 2 båter';
         return;
@@ -52,6 +51,10 @@ document.getElementById('order').onclick = () => {
     }
     else if((new Date(endDate.value) - new Date(startDate.value)) < 0 ){
         utskrift.innerText = 'Du må velge startdato før sluttdato';
+        return;
+    }
+    else if(new Date(startDate.value) < new Date()){
+        utskrift.innerText = 'Du må velge startdato enten i dag eller senere';
         return;
     }
     if(kano.value > 0){

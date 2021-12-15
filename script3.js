@@ -58,13 +58,13 @@ table += "<table>";
 table+= "<tr>"
 table += "<td></td>"
 for(let i = 10; i <=19; i++){
-table+= `<td> ${i} </td>`;
+table+= `<th> ${i} </th>`;
 }
 table += "</tr>";
 
 for (let i = 10; i <= 19; i++){
 table += "<tr>";
-table += `<td> ${i} </td>` 
+table += `<th> ${i} </th>` 
 for (let j = 10; j <= 19; j++){
     table+= `<td> ${i*j}</td>`;
 }

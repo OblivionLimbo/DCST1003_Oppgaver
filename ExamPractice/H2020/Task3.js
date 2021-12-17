@@ -40,8 +40,8 @@ let count = 0;
 setTimeout(() => {
     let btn = document.createElement('button')
     btn.innerText = "Endre bakgrunnsfarge";
-    btn.onclick = () =>{
-        if(count % 2 == 0){
+    btn.onclick = () => {
+        if(count % 2 == 1){
             document.body.style.backgroundColor = "red";
         }
         else{
